@@ -1,14 +1,3 @@
-// const open = document.querySelector('[data-open-modal]');
-// const close = document.querySelector('[data-close-modal]');
-// const modal = document.querySelector('[data-modal]');
-
-// open.addEventListener('click',()=>{
-//   modal.showModal()
-// });
-// // no key listeners used
-// close.addEventListener('click',()=>{
-//   modal.close()
-// });
 
 let overlays = {},
     overlayBg = document.createElement('div');
@@ -20,9 +9,12 @@ document.querySelectorAll('[overlay]').forEach(el => {
   el.innerHTML += '<button class="close" onclick="closeOverlay()">&times;</button>';
 });
 
-function openOverlay(name) {
+function openOverlay(names) {
   overlayBg.classList.add('open');
-  overlays[name].classList.add('open');
+  names.map((name)=> overlays[name].classList.add('open') )
+
+
+
 }
 function closeOverlay() {
   Object.values(overlays).forEach(el => el.classList.remove('open'));

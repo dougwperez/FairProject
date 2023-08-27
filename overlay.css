@@ -31,13 +31,14 @@ body {
   .overlayBg.open {
     display: block;
   }
-  [overlay] {
+  .search-bar {
     position: fixed;
-    top: 50%;
+    top: 30%;
     left: 50%;
     z-index: 10;
     transform: translate(-50%, -50%);
-    width: 350px;
+    width: 1174px;
+    height: 64px;
     padding: 30px;
     background-color: white;
     box-shadow: 0 3px 5px #0005;
@@ -48,14 +49,14 @@ body {
       opacity 0.4s,
       transform 0.4s;
   }
-  [overlay].open {
+  .search-bar.open {
     visibility: visible;
     opacity: 1;
     transition:
       opacity 0.7s,
       transform 0.7s;
   }
-  [overlay] button.close {
+  .search-bar button.close {
     background: none;
     border: none;
     position: absolute;
@@ -66,7 +67,50 @@ body {
     cursor: pointer;
     outline: none;
   }
-  [overlay] button.close:hover,
-  [overlay] button.close:focus {
+  .search-bar button.close:hover,
+  .search-bar button.close:focus {
     color: #000;
   }
+
+
+  .results-body {
+    position: fixed;
+    top: 70%;
+    left: 50%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    width: 1174px;
+    height: 662px;
+    padding: 30px;
+    background-color: white;
+    box-shadow: 0 3px 5px #0005;
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      visibility 0s linear 0.4s,
+      opacity 0.4s,
+      transform 0.4s;
+  }
+  .results-body.open {
+    visibility: visible;
+    opacity: 1;
+    transition:
+      opacity 0.7s,
+      transform 0.7s;
+  }
+  .results-body button.close {
+    background: none;
+    border: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    outline: none;
+  }
+  .results-body button.close:hover,
+  .results-body button.close:focus {
+    color: #000;
+  }
+  

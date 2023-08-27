@@ -63,13 +63,12 @@
       <div class="hp-text">
         <h1> <brand class="brand"> The Daily Bugle </brand> | Dummy News Website</h1>
       </div>
-      <button onclick="openOverlay('overlay_one')"> Open Overlay </button>
-      <button onclick="openOverlay('overlay_two')"> A Different Overlay </button>
-        <div overlay="overlay_one">
-          I am an overlay!
+      <button onclick="openOverlay(['search-bar', 'results-body'])"> Open Overlay </button>
+        <div overlay="search-bar" class="search-bar">
+          Search Bar
         </div>
-        <div overlay="overlay_two">
-        I am another overlay!
+        <div overlay="results-body" class="results-body">
+        Results Body
         </div>
  
       <div class="hp-date">
