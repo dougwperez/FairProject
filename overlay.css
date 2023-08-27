@@ -27,13 +27,14 @@ body {
     width: 100vw;
     height: 100vh;
     display: none;
+    background-color: rgba(0,0,0,0.5);
   }
   .overlayBg.open {
     display: block;
   }
   .search-bar {
     position: fixed;
-    top: 30%;
+    top: 20%;
     left: 50%;
     z-index: 10;
     transform: translate(-50%, -50%);
@@ -75,7 +76,7 @@ body {
 
   .results-body {
     position: fixed;
-    top: 70%;
+    top: 60%;
     left: 50%;
     z-index: 10;
     transform: translate(-50%, -50%);
