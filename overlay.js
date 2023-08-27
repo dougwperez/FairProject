@@ -6,7 +6,7 @@ overlayBg.onclick = closeOverlay;
 document.body.appendChild(overlayBg);
 document.querySelectorAll('[overlay]').forEach(el => {
   overlays[el.getAttribute('overlay')] = el;
-  el.innerHTML += '<button class="close" onclick="closeOverlay()">&times;</button>';
+  // el.innerHTML += '<button class="close" onclick="closeOverlay()">&times;</button>';
 });
 
 function openOverlay(names) {
