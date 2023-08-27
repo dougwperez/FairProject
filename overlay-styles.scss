@@ -1,0 +1,66 @@
+body {
+    padding-top: 4rem;
+    text-align: center;
+    font-family: system-ui, sans-serif;
+    font-weight: 600;
+  }
+  svg {
+    margin: .6rem;
+    stroke:black;
+  }
+  
+  .intro {
+    padding: 0 0 2rem 0;
+  }
+  
+  dialog {
+    overflow: visible;
+    padding: 1.2rem;
+    border: 0px solid grey;
+    border-radius: 1rem; 
+    
+    animation: animate .12s ease-out;
+    
+    &::backdrop {
+      background-color:rgba(0,0,0,0.55);
+    }
+  }
+  
+  button {
+    font-family: system-ui, sans-serif;
+    font-weight:900;
+    cursor: pointer;
+    
+    &[data-open-modal] {
+      padding: .5rem 1rem;
+      border: 0;
+      border-radius: .4rem;
+      outline: 3px solid lightgrey;
+      font-weight: 500;
+      &:hover {
+        outline-offset: 3px;
+      }
+    }
+    &[data-close-modal] {
+      position: absolute;
+      top:-1rem;
+      padding: 0;
+      height: 2rem;
+      aspect-ratio:1;
+      border: 0;
+      border-radius: 2rem;
+      outline: white solid 4px;
+      outline-offset: -1px;
+      
+      &:hover {
+        background-color:grey;
+      }
+    }
+  }
+  
+  @keyframes animate {
+    0%    {transform:  scaleY(.2)}
+    80%   {transform:  scaleY(1.14)}
+    100%  {transform:  scaleY(1)}
+  }
+  

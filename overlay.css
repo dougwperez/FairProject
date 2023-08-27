@@ -1,0 +1,72 @@
+/* Page styles */
+body {
+    font-family: Arial;
+    margin: 50px;
+  }
+  body > button {
+    display: block;
+    min-width: 150px;
+    padding: 8px;
+    font-size: 20px;
+    background-color: white;
+    border: 1px solid gray;
+    border-radius: 5px;
+    margin-bottom: 20px;
+  }
+  body > button:hover {
+    border-color: dodgerblue;
+    cursor: pointer;
+  }
+  
+  /* Overlay Styles */
+  .overlayBg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 5;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+  }
+  .overlayBg.open {
+    display: block;
+  }
+  [overlay] {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    z-index: 10;
+    transform: translate(-50%, -50%);
+    width: 350px;
+    padding: 30px;
+    background-color: white;
+    box-shadow: 0 3px 5px #0005;
+    visibility: hidden;
+    opacity: 0;
+    transition:
+      visibility 0s linear 0.4s,
+      opacity 0.4s,
+      transform 0.4s;
+  }
+  [overlay].open {
+    visibility: visible;
+    opacity: 1;
+    transition:
+      opacity 0.7s,
+      transform 0.7s;
+  }
+  [overlay] button.close {
+    background: none;
+    border: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    outline: none;
+  }
+  [overlay] button.close:hover,
+  [overlay] button.close:focus {
+    color: #000;
+  }
