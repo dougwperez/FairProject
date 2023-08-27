@@ -146,5 +146,16 @@ body {
     flex-direction: column;
     align-items: center;
   justify-content: center;
+  gap: 20px;
   }
-  
+
+  .bubbles-image {
+    /* margin-bottom: 30px; */
+    /* border-bottom: 1px solid #888; */
+  }
+
+
+  .fair-logo {
+    margin-left: auto;
+    margin-top: 17px;
+  }
