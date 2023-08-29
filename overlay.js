@@ -10,41 +10,45 @@ document.querySelectorAll('[overlay]').forEach(el => {
 });
 
 function openOverlay(names) {
+  document.body.style.overflow = 'hidden';
   overlayBg.classList.add('open');
   names.map((name)=> overlays[name].classList.add('open') )
-
-
-
 }
 function closeOverlay() {
+  document.body.style.overflow = 'visible';
   Object.values(overlays).forEach(el => el.classList.remove('open'));
   overlayBg.classList.remove('open');
+}
+
+function fadeOutWelcomeScreen(){
+  let header = document.getElementById('welcome-screen-header').style;
+  header.opacity = 1;
+  (function fade(){(header.opacity-=.1)<0?header.display="none":setTimeout(fade,40)})();
+
+  let bubbles = document.getElementById('bubbles-body').style;
+  bubbles.opacity = 1;
+  (function fade(){(bubbles.opacity-=.1)<0?bubbles.display="none":setTimeout(fade,40)})();
+
 }
 
 
 const searchText = document.querySelector("#searchText");
 
 function generateResponse() {
-  console.log('searchText', searchText.value)
 
 
+fadeOutWelcomeScreen()
 
-  async function logMovies() {
-    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
-    const movies = await response.json();
-    console.log(movies);
-  }
 
-  logMovies()
 
   const url = 'https://javascripttest-s45m7n7ksq-uc.a.run.app';
 const headers = {
-  'Content-Type': 'application/json',
-  'Access-Control-Allow-Origin':'*',
+  'Content-Type': "application/json",
+  "Access-Control-Allow-Origin":'*',
   'Access-Control-Allow-Methods':'POST, PATCH, OPTIONS'
 };
 const data = {
-  prompt: 'What is',
+  "prompt": "What is",
 };
 
 // Create the fetch request
