@@ -1,94 +1,104 @@
+var header = document.getElementById("welcome-screen-header").style;
+var bubbles = document.getElementById("bubbles-body").style;
+var screen1Array = document.getElementsByClassName("screen-1");
+console.log("Koca: screen1 ", screen1Array);
+var screen2Array = document.getElementsByClassName("screen-2");
 
 let overlays = {},
-    overlayBg = document.createElement('div');
-overlayBg.classList.add('overlayBg');
+  overlayBg = document.createElement("div");
+overlayBg.classList.add("overlayBg");
 overlayBg.onclick = closeOverlay;
 document.body.appendChild(overlayBg);
-document.querySelectorAll('[overlay]').forEach(el => {
-  overlays[el.getAttribute('overlay')] = el;
+document.querySelectorAll("[overlay]").forEach((el) => {
+  overlays[el.getAttribute("overlay")] = el;
   // el.innerHTML += '<button class="close" onclick="closeOverlay()">&times;</button>';
 });
 
 function openOverlay(names) {
-  document.body.style.overflow = 'hidden';
-  overlayBg.classList.add('open');
-  names.map((name)=> overlays[name].classList.add('open') )
+  document.body.style.overflow = "hidden";
+  overlayBg.classList.add("open");
+  names.map((name) => overlays[name].classList.add("open"));
 }
 function closeOverlay() {
-  document.body.style.overflow = 'visible';
-  Object.values(overlays).forEach(el => el.classList.remove('open'));
-  overlayBg.classList.remove('open');
+  document.body.style.overflow = "visible";
+  Object.values(overlays).forEach((el) => el.classList.remove("open"));
+  overlayBg.classList.remove("open");
+
+  for (let item of screen1Array) {
+    item.style.display = "inline";
+    item.style.opacity = 1;
+  }
+
+  for (let item of screen2Array) {
+    item.style.display = "none";
+  }
 }
 
 function fadeInResultsScreen() {
- let test = document.getElementsByClassName("results-screen-question")[0]
- test.style.display = 'inline'
+  //  test.style.display = 'inline'
 
+  for (let item of screen2Array) {
+    item.style.display = "inline";
+  }
 }
 
-function fadeOutWelcomeScreen(){
-  let header = document.getElementById('welcome-screen-header').style;
+function fadeOutWelcomeScreen() {
   header.opacity = 1;
-  (function fade(){(header.opacity-=.1)<0?header.display="none":setTimeout(fade,40)})();
+  (function fade() {
+    (header.opacity -= 0.1) < 0
+      ? (header.display = "none")
+      : setTimeout(fade, 40);
+  })();
 
-  let bubbles = document.getElementById('bubbles-body').style;
   bubbles.opacity = 1;
-  (function fade(){(bubbles.opacity-=.1)<0?bubbles.display="none":setTimeout(fade,40)})();
-  // setTimeout(fadeInResultsScreen(), 13800)
+  (function fade() {
+    (bubbles.opacity -= 0.1) < 0
+      ? (bubbles.display = "none")
+      : setTimeout(fade, 40);
+  })();
   setTimeout(() => {
-    fadeInResultsScreen()
+    fadeInResultsScreen();
   }, 800);
-  
 }
-
 
 const searchText = document.querySelector("#searchText");
 
 function generateResponse() {
+  fadeOutWelcomeScreen();
 
+  const url = "https://javascripttest-s45m7n7ksq-uc.a.run.app";
+  const headers = {
+    "Content-Type": "application/json",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "POST, PATCH, OPTIONS",
+  };
+  const data = {
+    prompt: "What is",
+  };
 
-fadeOutWelcomeScreen()
-
-
-
-  const url = 'https://javascripttest-s45m7n7ksq-uc.a.run.app';
-const headers = {
-  'Content-Type': "application/json",
-  "Access-Control-Allow-Origin":'*',
-  'Access-Control-Allow-Methods':'POST, PATCH, OPTIONS'
-};
-const data = {
-  "prompt": "What is",
-};
-
-// Create the fetch request
-fetch(url, {
-  method: 'POST',
-  headers: headers,
-  mode: 'no-cors',
-  body: JSON.stringify(data),
-})
-  .then(response => {
-    // Check if the response is successful (status code 200-299)
-    console.log("response", response)
-    if (response.ok) {
-      console.log('Koca: response.json() ', response.json());
-      return response.json(); // Parse the JSON response
-      
-    } else {
-      throw new Error('Request failed with status: ' + response.status);
-    }
+  // Create the fetch request
+  fetch(url, {
+    method: "POST",
+    headers: headers,
+    mode: "no-cors",
+    body: JSON.stringify(data),
   })
-  .then(data => {
-    // Handle the JSON data returned from the server
-    console.log('Response data:', data);
-  })
-  .catch(error => {
-    // Handle any errors that occurred during the fetch
-    console.error('Error:', error);
-  });
-
-  
-
+    .then((response) => {
+      // Check if the response is successful (status code 200-299)
+      console.log("response", response);
+      if (response.ok) {
+        console.log("Koca: response.json() ", response.json());
+        return response.json(); // Parse the JSON response
+      } else {
+        throw new Error("Request failed with status: " + response.status);
+      }
+    })
+    .then((data) => {
+      // Handle the JSON data returned from the server
+      console.log("Response data:", data);
+    })
+    .catch((error) => {
+      // Handle any errors that occurred during the fetch
+      console.error("Error:", error);
+    });
 }
-
