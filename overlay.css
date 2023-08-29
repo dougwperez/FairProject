@@ -184,3 +184,26 @@ body {
   .screen-2 {
     display: none;
   }
+
+  .results-question {
+    margin-right: auto;
+  }
+
+  .screen-2-body {
+    display: flex;
+  }
+
+  .body-text {
+    width: 800px;
+    margin-left: 30px;
+  }
+
+  .references-section {
+    width: 300px;
+    margin-left: 40px;
+  }
+
+  .link-list {
+    display: flex;
+    flex-direction: column;
+  }
