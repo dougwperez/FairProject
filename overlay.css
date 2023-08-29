@@ -103,15 +103,17 @@ body {
 
 
 
-
+  @media (min-width: 1750px) {
+    /* … */
+  
   .results-body {
     position: fixed;
-    top: 470px;
+    top: 570px;
     left: 50%;
     z-index: 10;
     transform: translate(-50%, -50%);
     width: 1174px;
-    height: 662px;
+    height: 862px;
     padding: 30px;
     background-color: white;
     box-shadow: 0 3px 5px #0005;
@@ -122,6 +124,58 @@ body {
       opacity 0.4s,
       transform 0.4s;
   }
+
+}
+
+@media (max-width: 1750px) {
+  /* … */
+
+.results-body {
+  position: fixed;
+  top: 470px;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  width: 1174px;
+  height: 662px;
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 3px 5px #0005;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    visibility 0s linear 0.4s,
+    opacity 0.4s,
+    transform 0.4s;
+}
+
+}
+
+@media (max-width: 1650px) {
+  /* … */
+
+.results-body {
+  position: fixed;
+  top: 445px;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  width: 1174px;
+  height: 612px;
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 3px 5px #0005;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    visibility 0s linear 0.4s,
+    opacity 0.4s,
+    transform 0.4s;
+}
+
+}
+
+  
   .results-body.open {
     visibility: visible;
     opacity: 1;

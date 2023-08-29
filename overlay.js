@@ -14,6 +14,9 @@ document.querySelectorAll("[overlay]").forEach((el) => {
   // el.innerHTML += '<button class="close" onclick="closeOverlay()">&times;</button>';
 });
 
+let width = window.innerWidth;
+console.log('Koca: width ', width);
+
 function openOverlay(names) {
   document.body.style.overflow = "hidden";
   overlayBg.classList.add("open");
