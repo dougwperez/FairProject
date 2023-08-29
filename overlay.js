@@ -20,6 +20,12 @@ function closeOverlay() {
   overlayBg.classList.remove('open');
 }
 
+function fadeInResultsScreen() {
+ let test = document.getElementsByClassName("results-screen-question")[0]
+ test.style.display = 'inline'
+
+}
+
 function fadeOutWelcomeScreen(){
   let header = document.getElementById('welcome-screen-header').style;
   header.opacity = 1;
@@ -28,7 +34,11 @@ function fadeOutWelcomeScreen(){
   let bubbles = document.getElementById('bubbles-body').style;
   bubbles.opacity = 1;
   (function fade(){(bubbles.opacity-=.1)<0?bubbles.display="none":setTimeout(fade,40)})();
-
+  // setTimeout(fadeInResultsScreen(), 13800)
+  setTimeout(() => {
+    fadeInResultsScreen()
+  }, 800);
+  
 }
 
 

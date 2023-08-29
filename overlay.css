@@ -41,7 +41,7 @@ body {
   }
   .search-bar {
     position: fixed;
-    top: 120px;
+    top: 90px;
     left: 50%;
     z-index: 10;
     transform: translate(-50%, -50%);
@@ -106,7 +106,7 @@ body {
 
   .results-body {
     position: fixed;
-    top: 500px;
+    top: 470px;
     left: 50%;
     z-index: 10;
     transform: translate(-50%, -50%);
@@ -176,4 +176,11 @@ body {
     right: 0;
     margin-bottom: 10px;
     margin-right: 10px;
+  }
+
+
+  /* RESULTS SCREEN */
+
+  .results-screen-question {
+    display: none;
   }
