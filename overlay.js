@@ -67,6 +67,8 @@ function fadeOutWelcomeScreen() {
 const searchText = document.querySelector("#searchText");
 
 function generateResponse() {
+  console.log("event started")
+  event.preventDefault()
   fadeOutWelcomeScreen();
 
   const url = "https://javascripttest-s45m7n7ksq-uc.a.run.app";

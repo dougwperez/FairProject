@@ -90,8 +90,10 @@
             </g>
           </svg>
         </div>
-        <input class="search-input" id="searchText" type="text" name="Search"
-          placeholder="What information can we help you find today?">
+        <form onsubmit="generateResponse()">
+          <input class="search-input" id="searchText" type="text" name="Search"
+            placeholder="What information can we help you find today?">
+        </form>
         <button class="close" onclick="closeOverlay()">&times;</button>
       </div>
     </div>
