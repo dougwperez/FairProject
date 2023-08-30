@@ -51,6 +51,17 @@ body > button:hover {
   transition: visibility 0s linear 0.4s, opacity 0.4s, transform 0.4s;
 }
 
+.relative {
+  position: relative;
+}
+
+.close-overlay {
+  position: absolute;
+  top: -40px;
+  left: 1144px;
+  /* margin: auto 0; */
+}
+
 .search-input {
   border: none;
   width: 500px;
