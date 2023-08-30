@@ -100,17 +100,19 @@ function fadeOutWelcomeScreen() {
 const searchText = document.querySelector("#searchText");
 
 function generateResponse() {
+
   event.preventDefault()
   fadeOutWelcomeScreen();
 
-  const url = "https://javascripttest-s45m7n7ksq-uc.a.run.app";
+  const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fr-rss-ext";
   const headers = {
-    "Content-Type": "application/json",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, PATCH, OPTIONS",
+    "Connection": "keep-alive",
+    "Content-Type": "application/json",
   };
   const data = {
-    prompt: "What is",
+    // "prompt": "3-Step Guide for Data Leaders to Move from Hype to Results?",
   };
 
   // Create the fetch request
