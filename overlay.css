@@ -95,12 +95,12 @@ body > button:hover {
 
   .results-body {
     position: fixed;
-    top: 570px;
+    top: 520px;
     left: 50%;
     z-index: 10;
     transform: translate(-50%, -50%);
     width: 1174px;
-    height: 862px;
+    height: 762px;
     padding: 30px;
     background-color: white;
     box-shadow: 0 3px 5px #0005;

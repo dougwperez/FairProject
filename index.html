@@ -76,7 +76,7 @@
     </div>
     <button onclick="openOverlay(['search-bar', 'results-body'])"> Open Overlay </button>
     <div overlay="search-bar" class="search-bar">
-      <div class="search-bar-content">
+      <form class="search-bar-content" onsubmit="generateResponse()">
         <div onclick="generateResponse()">
           <svg class="search-icon" width="16px" height="16px" viewBox="0 0 16 16" version="1.1"
             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -90,12 +90,12 @@
             </g>
           </svg>
         </div>
-        <form onsubmit="generateResponse()">
-          <input class="search-input" id="searchText" type="text" name="Search"
-            placeholder="What information can we help you find today?">
-        </form>
-        <button class="close" onclick="closeOverlay()">&times;</button>
-      </div>
+        <!-- <form onsubmit="generateResponse()"> -->
+        <input class="search-input" id="searchText" type="text" name="Search"
+          placeholder="What information can we help you find today?">
+        <!-- </form> -->
+        <button class="close" type="reset">&times;</button>
+      </form>
     </div>
 
     <div overlay="results-body" class="results-body">
