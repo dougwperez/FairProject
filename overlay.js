@@ -1,8 +1,23 @@
 var header = document.getElementById("welcome-screen-header").style;
 var bubbles = document.getElementById("bubbles-body").style;
 var screen1Array = document.getElementsByClassName("screen-1");
-console.log("Koca: screen1 ", screen1Array);
 var screen2Array = document.getElementsByClassName("screen-2");
+var resetBtn = document.getElementsByClassName("close")[0];
+var searchInput = document.getElementById("searchText")
+
+
+searchInput.addEventListener('input', function (event) {
+	// Do something...
+  console.log("CONTACT", searchInput.value.length)
+  if (searchInput.value.length > 0) {
+  resetBtn.style.visibility = 'visible'
+  } 
+});
+
+function resetSearch(){
+  console.log("reset")
+  resetBtn.style.visibility = 'hidden'
+}
 
 let overlays = {},
   overlayBg = document.createElement("div");
@@ -17,10 +32,28 @@ document.querySelectorAll("[overlay]").forEach((el) => {
 let width = window.innerWidth;
 console.log('Koca: width ', width);
 
+
+function callback(mutations) {
+  console.log('Koca: mutations ', mutations);
+  if (searchInput.value.length > 0) {
+    resetBtn.style.visibility = 'visible'
+  }
+}
+
 function openOverlay(names) {
   document.body.style.overflow = "hidden";
   overlayBg.classList.add("open");
   names.map((name) => overlays[name].classList.add("open"));
+  resetBtn.style.visibility = 'hidden'
+  if (searchInput.value.length > 0) {
+    resetBtn.style.visibility = 'visible'
+  }
+  console.log("searchInput", searchInput.value)
+  console.log('Koca: searchInput.value.length ', searchInput.value.length);
+
+  let observer = new MutationObserver(callback);
+  observer.observe(searchInput, characterData);
+
 }
 function closeOverlay() {
   document.body.style.overflow = "visible";
@@ -67,7 +100,6 @@ function fadeOutWelcomeScreen() {
 const searchText = document.querySelector("#searchText");
 
 function generateResponse() {
-  console.log("event started")
   event.preventDefault()
   fadeOutWelcomeScreen();
 
