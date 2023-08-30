@@ -230,6 +230,15 @@ body > button:hover {
   /* width: 20px; */
 }
 
+#divider {
+  position: fixed;
+  bottom: 20;
+  width: 1110px;
+  background-color: #003067;
+  height: 3.5px;
+  margin-bottom: 220px;
+}
+
 .fair-logo {
   position: fixed;
   bottom: 0;
@@ -254,12 +263,21 @@ body > button:hover {
 
 .body-text {
   width: 800px;
-  margin-left: 30px;
+  margin-left: 70px;
+  margin-top: 10px;
+}
+
+.vl {
+  border-left: 1px solid #164175;
+  margin-left: 40px;
+  margin-top: 5px;
+  height: 220px;
 }
 
 .references-section {
   width: 300px;
   margin-left: 40px;
+  margin-top: 10px;
 }
 
 .link-list {
