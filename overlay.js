@@ -104,7 +104,7 @@ function generateResponse() {
   event.preventDefault()
   fadeOutWelcomeScreen();
 
-  const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fr-rss-ext";
+  const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fr-rss-qry";
   const headers = {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "POST, PATCH, OPTIONS",
@@ -112,7 +112,7 @@ function generateResponse() {
     "Content-Type": "application/json",
   };
   const data = {
-    // "prompt": "3-Step Guide for Data Leaders to Move from Hype to Results?",
+    "prompt": "3-Step Guide for Data Leaders to Move from Hype to Results?",
   };
 
   // Create the fetch request
@@ -124,7 +124,7 @@ function generateResponse() {
   })
     .then((response) => {
       // Check if the response is successful (status code 200-299)
-      console.log("response", response);
+      console.log("response", response.json());
       if (response.ok) {
         console.log("Koca: response.json() ", response.json());
         return response.json(); // Parse the JSON response
