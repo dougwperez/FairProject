@@ -124,7 +124,6 @@ function generateResponse() {
   })
     .then((response) => {
       // Check if the response is successful (status code 200-299)
-      console.log("response", response.json());
       if (response.ok) {
         console.log("Koca: response.json() ", response.json());
         return response.json(); // Parse the JSON response
