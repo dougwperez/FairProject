@@ -104,39 +104,74 @@ function generateResponse() {
   event.preventDefault()
   fadeOutWelcomeScreen();
 
-  const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fr-rss-qry";
-  const headers = {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Methods": "POST, PATCH, OPTIONS",
-    "Connection": "keep-alive",
-    "Content-Type": "application/json",
-  };
-  const data = {
-    "prompt": "3-Step Guide for Data Leaders to Move from Hype to Results?",
-  };
+const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fair-rss-query";
+const headers = {
+  "Access-Control-Allow-Origin": "*",
+  "Access-Control-Allow-Methods": "POST, PATCH, OPTIONS",
+  "Connection": "keep-alive",
+  "Content-Type": "application/json",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
+};
+const data = {
+  "prompt": "3-Step Guide for Data Leaders to Move from Hype to Results?",
+};
 
-  // Create the fetch request
-  fetch(url, {
-    method: "POST",
-    headers: headers,
-    mode: "no-cors",
-    body: JSON.stringify(data),
-  })
-    .then((response) => {
-      // Check if the response is successful (status code 200-299)
-      if (response.ok) {
-        console.log("Koca: response.json() ", response.json());
-        return response.json(); // Parse the JSON response
-      } else {
-        throw new Error("Request failed with status: " + response.status);
-      }
-    })
-    .then((data) => {
-      // Handle the JSON data returned from the server
-      console.log("Response data:", data);
-    })
-    .catch((error) => {
-      // Handle any errors that occurred during the fetch
-      console.error("Error:", error);
+async function fetchData() {
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: headers,
+      mode: "no-cors",
+      body: JSON.stringify(data),
     });
+
+    // Check if the response is successful (status code 200-299)
+    if (response.ok) {
+      const responseData = await response.json(); // Parse the JSON response
+      console.log("Response data:", responseData);
+    } else {
+      throw new Error("Request failed with status: " + response.status);
+    }
+  } catch (error) {
+    // Handle any errors that occurred during the fetch
+    console.error("Error:", error);
+  }
+}
+
+fetchData();
+
+  // const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fr-rss-qry";
+  // const headers = {
+  //   "Access-Control-Allow-Origin": "*",
+  //   "Access-Control-Allow-Methods": "POST, PATCH, OPTIONS",
+  //   "Connection": "keep-alive",
+  //   "Content-Type": "application/json",
+  // };
+  // const data = {
+  //   "prompt": "3-Step Guide for Data Leaders to Move from Hype to Results?",
+  // };
+  // // Create the fetch request
+  // fetch(url, {
+  //   method: "POST",
+  //   headers: headers,
+  //   mode: "no-cors",
+  //   body: JSON.stringify(data),
+  // })
+  //   .then((response) => {
+  //     // Check if the response is successful (status code 200-299)
+  //     if (response.ok) {
+  //       console.log("Koca: response.json() ", response.json());
+  //       return response.json(); // Parse the JSON response
+  //     } else {
+  //       throw new Error("Request failed with status: " + response.status);
+  //     }
+  //   })
+  //   .then((data) => {
+  //     // Handle the JSON data returned from the server
+  //     console.log("Response data:", data);
+  //   })
+  //   .catch((error) => {
+  //     // Handle any errors that occurred during the fetch
+  //     console.error("Error:", error);
+  //   });
 }
