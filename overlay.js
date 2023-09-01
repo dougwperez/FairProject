@@ -138,7 +138,7 @@ async function fetchData() {
   } catch (error) {
     // Handle any errors that occurred during the fetch
     errorResponsePrompt.innerHTML = searchInput.value;
-    errorResponseBody2.innerHTML = `No results found for: <b>${searchInput.value}</b>`
+    errorResponseBody2.innerHTML = `No results found for: <b>"${searchInput.value}"</b>`
 
     for (let item of screen2Array) {
       item.style.display = "none";
