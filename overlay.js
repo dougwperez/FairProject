@@ -51,8 +51,6 @@ function openOverlay(names) {
   console.log("searchInput", searchInput.value)
   console.log('Koca: searchInput.value.length ', searchInput.value.length);
 
-  let observer = new MutationObserver(callback);
-  observer.observe(searchInput, characterData);
 
 }
 function closeOverlay() {
@@ -106,14 +104,10 @@ function generateResponse() {
 
 const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fair-rss-query";
 const headers = {
-  "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Methods": "POST, PATCH, OPTIONS",
-  "Connection": "keep-alive",
   "Content-Type": "application/json",
-  "Access-Control-Allow-Headers": "Content-Type, Authorization",
 };
 const data = {
-  "prompt": "3-Step Guide for Data Leaders to Move from Hype to Results?",
+  "prompt": "How do I retire as a CDO?",
 };
 
 async function fetchData() {
