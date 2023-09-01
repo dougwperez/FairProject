@@ -7,15 +7,12 @@ var searchInput = document.getElementById("searchText")
 
 
 searchInput.addEventListener('input', function (event) {
-	// Do something...
-  console.log("CONTACT", searchInput.value.length)
   if (searchInput.value.length > 0) {
   resetBtn.style.visibility = 'visible'
   } 
 });
 
 function resetSearch(){
-  console.log("reset")
   resetBtn.style.visibility = 'hidden'
 }
 
@@ -30,15 +27,8 @@ document.querySelectorAll("[overlay]").forEach((el) => {
 });
 
 let width = window.innerWidth;
-console.log('Koca: width ', width);
 
 
-function callback(mutations) {
-  console.log('Koca: mutations ', mutations);
-  if (searchInput.value.length > 0) {
-    resetBtn.style.visibility = 'visible'
-  }
-}
 
 function openOverlay(names) {
   document.body.style.overflow = "hidden";
@@ -48,9 +38,6 @@ function openOverlay(names) {
   if (searchInput.value.length > 0) {
     resetBtn.style.visibility = 'visible'
   }
-  console.log("searchInput", searchInput.value)
-  console.log('Koca: searchInput.value.length ', searchInput.value.length);
-
 
 }
 function closeOverlay() {
@@ -96,8 +83,11 @@ function fadeOutWelcomeScreen() {
 }
 
 const searchText = document.querySelector("#searchText");
+console.log('Koca: searchText ', searchText);
 
 function generateResponse() {
+
+    console.log("searchInput", searchInput.value)
 
   event.preventDefault()
   fadeOutWelcomeScreen();
@@ -106,8 +96,9 @@ const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fair-rs
 const headers = {
   "Content-Type": "application/json",
 };
+// What is 3-Step Guide for Data Leaders to Move from Hype to Results?
 const data = {
-  "prompt": "How do I retire as a CDO?",
+  "prompt": `${searchInput.value}`,
 };
 
 async function fetchData() {
