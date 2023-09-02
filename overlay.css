@@ -109,64 +109,45 @@ body > button:hover {
 .search-bar button.close:focus {
   color: #000;
 }
+
+/* CONTROL RESULTS-BODY */
+.results-body {
+  position: fixed;
+  left: 50%;
+  z-index: 10;
+  transform: translate(-50%, -50%);
+  padding: 30px;
+  background-color: white;
+  box-shadow: 0 3px 5px #0005;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.4s, opacity 0.4s, transform 0.4s;
+}
+
 /* LARGE */
 @media (min-width: 1750px) {
-  /* … */
-
   .results-body {
-    position: fixed;
     top: 520px;
-    left: 50%;
-    z-index: 10;
-    transform: translate(-50%, -50%);
     width: 1174px;
     height: 762px;
-    padding: 30px;
-    background-color: white;
-    box-shadow: 0 3px 5px #0005;
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s linear 0.4s, opacity 0.4s, transform 0.4s;
   }
 }
+
 /* MEDIUM */
 @media (max-width: 1750px) {
-  /* … */
-
   .results-body {
-    position: fixed;
     top: 470px;
-    left: 50%;
-    z-index: 10;
-    transform: translate(-50%, -50%);
     width: 1174px;
     height: 662px;
-    padding: 30px;
-    background-color: white;
-    box-shadow: 0 3px 5px #0005;
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s linear 0.4s, opacity 0.4s, transform 0.4s;
   }
 }
+
 /* SMALL */
 @media (max-width: 1650px) {
-  /* … */
-
   .results-body {
-    position: fixed;
     top: 450px;
-    left: 50%;
-    z-index: 10;
-    transform: translate(-50%, -50%);
     width: 1174px;
     height: 622px;
-    padding: 30px;
-    background-color: white;
-    box-shadow: 0 3px 5px #0005;
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0s linear 0.4s, opacity 0.4s, transform 0.4s;
   }
 }
 
@@ -191,6 +172,7 @@ body > button:hover {
   color: #000;
 }
 
+/* CONTROL RESULTS-CONTENT */
 .results-content {
   display: flex;
   flex-direction: column;
@@ -198,21 +180,21 @@ body > button:hover {
   justify-content: center;
   gap: 15px;
 }
-
+/* LARGE */
 @media (min-width: 1750px) {
   /* … */
   .results-content {
     gap: 25px;
   }
 }
-
+/* MEDIUM */
 @media (max-width: 1750px) {
   /* … */
   .results-content {
     gap: 15px;
   }
 }
-
+/* SMALL */
 @media (max-width: 1650px) {
   /* … */
   .results-content {
@@ -231,8 +213,6 @@ body > button:hover {
   background-color: #dedede;
   height: px;
   margin-bottom: 73px;
-  /* transform: translateY(-10px) */
-  /* width: 20px; */
 }
 
 #divider {

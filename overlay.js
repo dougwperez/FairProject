@@ -14,6 +14,8 @@ var errorResponseBody = document.getElementsByClassName("error-screen body-text"
 var errorResponseBody2 = document.getElementsByClassName("error-screen body-text-header")[0]
 
 
+console.log("window.innerHeight", window.innerWidth)
+
 searchInput.addEventListener('input', function (event) {
   if (searchInput.value.length > 0) {
   resetBtn.style.visibility = 'visible'
