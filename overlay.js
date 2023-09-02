@@ -4,6 +4,8 @@ var screen1Array = document.getElementsByClassName("screen-1");
 var screen2Array = document.getElementsByClassName("screen-2");
 var errorScreenArray = document.getElementsByClassName("error-screen");
 var resetBtn = document.getElementsByClassName("close")[0];
+var charCount = document.getElementById('char-count-overlay')
+var form = document.getElementsByClassName("search-bar-content")[0]
 var searchInput = document.getElementById("searchText")
 var responseBody = document.getElementsByClassName("screen-2 body-text")[0]
 var responsePrompt = document.getElementsByClassName("screen-2 results-question")[0]
@@ -16,10 +18,12 @@ searchInput.addEventListener('input', function (event) {
   if (searchInput.value.length > 0) {
   resetBtn.style.visibility = 'visible'
   } 
+  charCount.innerHTML = `${searchInput.value.length}/1000`
 });
 
 function resetSearch(){
   resetBtn.style.visibility = 'hidden'
+  charCount.innerHTML = '0/1000'
 }
 
 let overlays = {},
@@ -47,6 +51,8 @@ function openOverlay(names) {
 
 }
 function closeOverlay() {
+  form.reset()
+  resetSearch()
   document.body.style.overflow = "visible";
   Object.values(overlays).forEach((el) => el.classList.remove("open"));
   overlayBg.classList.remove("open");

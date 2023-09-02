@@ -59,12 +59,20 @@ body > button:hover {
   position: absolute;
   top: -40px;
   left: 1144px;
-  /* margin: auto 0; */
+  cursor: pointer;
+}
+
+#char-count-overlay {
+  position: absolute;
+  top: 65px;
+  left: 1125px;
+  color: white;
+  font-size: 12px;
 }
 
 .search-input {
   border: none;
-  width: 500px;
+  width: 550px;
   outline: none;
 }
 
@@ -85,6 +93,7 @@ body > button:hover {
 .search-icon {
   margin-left: 20px;
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .search-bar button.close {
@@ -212,10 +221,6 @@ body > button:hover {
 }
 
 .bubbles-image {
-  /* margin-bottom: 30px; */
-  /* border-bottom: 1px solid #888; */
-  /* transform: translateY(40) */
-  /* margin-bottom: 20px; */
   width: "20%";
 }
 
