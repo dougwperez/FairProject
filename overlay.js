@@ -2,26 +2,35 @@ var header = document.getElementById("welcome-screen-header").style;
 var bubbles = document.getElementById("bubbles-body").style;
 var screen1Array = document.getElementsByClassName("screen-1");
 var screen2Array = document.getElementsByClassName("screen-2");
-var errorScreenArray = document.getElementsByClassName("error-screen");
+// var errorScreenArray = document.getElementsByClassName("error-screen");
 var resetBtn = document.getElementsByClassName("close")[0];
 var charCount = document.getElementById('char-count-overlay')
 var form = document.getElementsByClassName("search-bar-content")[0]
+console.log('Koca: form ', form);
 var searchInput = document.getElementById("searchText")
-var responseBody = document.getElementsByClassName("screen-2 body-text")[0]
-var responsePrompt = document.getElementsByClassName("screen-2 results-question")[0]
-var errorResponsePrompt = document.getElementsByClassName("error-screen results-question")[0]
-var errorResponseBody = document.getElementsByClassName("error-screen body-text")[0]
-var errorResponseBody2 = document.getElementsByClassName("error-screen body-text-header")[0]
+var loader = document.getElementById("loader")
+var resultsContent = document.getElementsByClassName("results-content")[0]
 
 
-console.log("window.innerHeight", window.innerWidth)
+
 
 searchInput.addEventListener('input', function (event) {
+  console.log("DSJFLDSJFJL")
   if (searchInput.value.length > 0) {
   resetBtn.style.visibility = 'visible'
   } 
   charCount.innerHTML = `${searchInput.value.length}/1000`
+  resultsContent.insertAdjacentHTML("afterbegin", finalChat)
 });
+
+
+// document.getElementsByClassName('search-icon')[0].addEventListener('click', function (event) {
+// generateResponse()
+// });
+
+// document.getElementsByClassName("search-bar-content")[0].addEventListener('submit', (event) => {
+//   generateResponse()
+// })
 
 function resetSearch(){
   resetBtn.style.visibility = 'hidden'
@@ -35,7 +44,6 @@ overlayBg.onclick = closeOverlay;
 document.body.appendChild(overlayBg);
 document.querySelectorAll("[overlay]").forEach((el) => {
   overlays[el.getAttribute("overlay")] = el;
-  // el.innerHTML += '<button class="close" onclick="closeOverlay()">&times;</button>';
 });
 
 let width = window.innerWidth;
@@ -44,6 +52,7 @@ let width = window.innerWidth;
 
 function openOverlay(names) {
   document.body.style.overflow = "hidden";
+  loader.style.display = 'none'
   overlayBg.classList.add("open");
   names.map((name) => overlays[name].classList.add("open"));
   resetBtn.style.visibility = 'hidden'
@@ -67,18 +76,23 @@ function closeOverlay() {
   for (let item of screen2Array) {
     item.style.display = "none";
   }
-
-  for (let item of errorScreenArray) {
-    item.style.display = "none";
-  }
 }
 
-function fadeInResultsScreen() {
-  //  test.style.display = 'inline'
 
-  for (let item of screen2Array) {
-    item.style.display = "inline";
-  }
+function fadeInLoader() {
+  loader.style.display = 'block';
+  // var opacity = 0;
+  // loader.style.display = 'block';
+  // loader.style.opacity = 0;
+
+  // var fadeInterval = setInterval(function () {
+  //   if (opacity < 1) {
+  //     opacity += 0.1;
+  //     loader.style.opacity = opacity;
+  //   } else {
+  //     clearInterval(fadeInterval);
+  //   }
+  // }, 100); // Adjust the interval for smoother or faster fading
 }
 
 function fadeOutWelcomeScreen() {
@@ -95,23 +109,43 @@ function fadeOutWelcomeScreen() {
       ? (bubbles.display = "none")
       : setTimeout(fade, 40);
   })();
-  setTimeout(() => {
-    fadeInResultsScreen();
-  }, 800);
+  fadeInLoader()
+  // THE CODE BELOW ONLY WORKS IF THE API IS DELAYED
+  // setTimeout(() => {
+  //   // loader.style.display = 'block';
+  //   fadeInLoader()
+  // }, 800);
 }
 
-const searchText = document.querySelector("#searchText");
-console.log('Koca: searchText ', searchText);
+
+
+
+function chatTemplate(data) {
+  return `
+  <h5 class='screen-2 results-question'>${data.prompt}</h5>
+  <hr id="divider" class="screen-2" />
+  <div class="screen-2-body">
+  <p class="screen-2 body-text">${data.content}</p>
+  <div class="vl screen-2"></div>
+  <div class="screen-2 references-section">
+    <h5 class="references-header">References</h5>
+    <div class="link-list">
+      <a href="https://www.w3schools.com"> <a href="https://www.w3schools.com">The Top 10 Tasks</a></a>
+      <a href="https://www.w3schools.com"> <a href="https://www.w3schools.com">Training for new CDOS</a></a>
+    </div>
+  </div>
+</div>
+  `
+}
 
 function generateResponse() {
-
-    console.log("searchInput", searchInput.value)
-    console.log("responseBody.innerHTML", responseBody.innerHTML)
 
   event.preventDefault()
   fadeOutWelcomeScreen();
 
-const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fr-rss-qry";
+
+  const url = "https://javascripttest-s45m7n7ksq-uc.a.run.app";
+// const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fr-rss-qry";
 const headers = {
   "Content-Type": "application/json",
 };
@@ -135,27 +169,21 @@ async function fetchData() {
 
     // Check if the response is successful (status code 200-299)
     if (response.ok) {
+      loader.style.display = 'none';
+      console.log('Koca: loader ', loader);
+     
       const responseData = await response.json(); // Parse the JSON response
-      console.log("Response data:", responseData);
-      responseBody.innerHTML = responseData.content;
-      responsePrompt.innerHTML = responseData.prompt;
+
+      const finalChat =  chatTemplate(responseData)
+      resultsContent.insertAdjacentHTML("afterbegin", finalChat)
 
     } else {
+      loader.style.display = 'none';
       throw new Error("Request failed with status: " + response.status);
     }
   } catch (error) {
+    loader.style.display = 'none';
     // Handle any errors that occurred during the fetch
-    errorResponsePrompt.innerHTML = searchInput.value;
-    errorResponseBody2.innerHTML = `No results found for: <b>"${searchInput.value}"</b>`
-
-    for (let item of screen2Array) {
-      item.style.display = "none";
-    }
-
-    for (let item of errorScreenArray) {
-      item.style.display = "inline";
-    }
-    
     console.error("Error:", error);
   }
 }
