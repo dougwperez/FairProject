@@ -145,6 +145,7 @@ function generateResponse() {
 
 
   const url = "https://javascripttest-s45m7n7ksq-uc.a.run.app";
+  // const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fair-rss-query"
 // const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fr-rss-qry";
 const headers = {
   "Content-Type": "application/json",

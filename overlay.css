@@ -64,7 +64,7 @@ body > button:hover {
 
 #char-count-overlay {
   position: absolute;
-  top: 65px;
+  top: 66px;
   left: 1125px;
   color: white;
   font-size: 12px;
@@ -129,27 +129,27 @@ body > button:hover {
 /* LARGE */
 @media (min-width: 1750px) {
   .results-body {
-    top: 520px;
+    top: 488px;
     width: 1174px;
-    height: 762px;
+    height: 688px;
   }
 }
 
 /* MEDIUM */
 @media (max-width: 1750px) {
   .results-body {
-    top: 470px;
+    top: 440px;
     width: 1174px;
-    height: 662px;
+    height: 592px;
   }
 }
 
 /* SMALL */
 @media (max-width: 1650px) {
   .results-body {
-    top: 450px;
+    top: 433px;
     width: 1174px;
-    height: 622px;
+    height: 577px;
   }
 }
 
@@ -208,15 +208,6 @@ body > button:hover {
   width: "20%";
 }
 
-#footer-line {
-  position: fixed;
-  bottom: 0;
-  width: 1174px;
-  background-color: #dedede;
-  height: px;
-  margin-bottom: 73px;
-}
-
 #divider {
   position: fixed;
   bottom: 20;
@@ -224,14 +215,8 @@ body > button:hover {
   background-color: #164175;
   height: 3.5px;
   margin-bottom: 250px;
-}
 
-.fair-logo {
-  position: fixed;
-  bottom: 0;
-  right: 0;
-  margin-bottom: 10px;
-  margin-right: 10px;
+  /* position: static; */
 }
 
 /* LOADER */
@@ -297,4 +282,63 @@ body > button:hover {
 .link-list {
   display: flex;
   flex-direction: column;
+}
+
+/* FOOTER */
+
+.footer {
+  position: fixed;
+  /* 1154 */
+  /* width: 1174px;
+  height: 70px;
+  top: 866px; */
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 10;
+  background-color: white;
+  box-shadow: 0 3px 5px #0005;
+  visibility: hidden;
+  opacity: 0;
+  border-top: 1px solid #dedede;
+}
+
+/* LARGE */
+@media (min-width: 1750px) {
+  .footer {
+    top: 866px;
+    width: 1174px;
+    height: 70px;
+  }
+}
+
+/* MEDIUM */
+@media (max-width: 1750px) {
+  .footer {
+    top: 770px;
+    width: 1174px;
+    height: 70px;
+  }
+}
+
+/* SMALL */
+@media (max-width: 1650px) {
+  .footer {
+    top: 756px;
+    width: 1174px;
+    height: 70px;
+  }
+}
+
+.footer.open {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.7s, transform 0.7s;
+}
+
+.fair-logo {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }

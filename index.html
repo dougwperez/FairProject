@@ -74,7 +74,7 @@
         <brand class="brand"> The Daily Bugle </brand> | Dummy News Website
       </h1>
     </div>
-    <button onclick="openOverlay(['search-bar', 'results-body'])"> Open Overlay </button>
+    <button onclick="openOverlay(['search-bar', 'results-body', 'footer'])"> Open Overlay </button>
     <div overlay="search-bar" class="search-bar">
       <div id="char-count-overlay">0/1000</div>
       <div class="close-overlay" onclick="closeOverlay()">
@@ -118,12 +118,15 @@
         <h3 id='welcome-screen-header' class="screen-1">Try asking for information similar to the examples below</h3>
         <div id="loader"></div>
         <img src="Images/bubbles2.jpeg" width='72%' alt="" id="bubbles-body" class="bubbles-image screen-1">
-        <hr id="footer-line" />
-        <img
-          src="https://raw.githubusercontent.com/dougwperez/FairProject/6fbbcea088abac1f52fffd9043d6c8c55303e4f4/svgs/FAIR%20logo.svg"
-          class="fair-logo" alt="" width="250" />
       </div>
     </div>
+
+    <div overlay="footer" class="footer">
+      <img
+        src="https://raw.githubusercontent.com/dougwperez/FairProject/6fbbcea088abac1f52fffd9043d6c8c55303e4f4/svgs/FAIR%20logo.svg"
+        class="fair-logo" alt="" width="250" />
+    </div>
+
 
     <div class="hp-date">
       <div class="date">
@@ -264,14 +267,7 @@
   <hr class="hr0">
 
   <!-- Part-04 -->
-  <div class="footer">
-    <b> Made by: Karthik Shetty </b> <br>
-    <b> Dummy News Website | The Daily Bugle </b>
-    <br>
-    <b>
-      <copyright class="copyright">&#169;</copyright> 2023
-    </b>
-  </div>
+
   <script src="overlay.js"></script>
 </body>
 
