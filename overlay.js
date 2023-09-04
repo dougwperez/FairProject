@@ -121,6 +121,9 @@ function fadeOutWelcomeScreen() {
 
 
 function chatTemplate(data) {
+  console.log('Koca: data references ', data.references);
+
+
   return `
   <h5 class='screen-2 results-question'>${data.prompt}</h5>
   <hr id="divider" class="screen-2" />
@@ -130,8 +133,9 @@ function chatTemplate(data) {
   <div class="screen-2 references-section">
     <h5 class="references-header">References</h5>
     <div class="link-list">
-      <a href="https://www.w3schools.com"> <a href="https://www.w3schools.com">The Top 10 Tasks</a></a>
-      <a href="https://www.w3schools.com"> <a href="https://www.w3schools.com">Training for new CDOS</a></a>
+    ${data.references.map((reference) =>{
+      return `<a href="${reference.link}">${reference.title}</a>`;
+        }).join('')}
     </div>
   </div>
 </div>
@@ -171,7 +175,7 @@ async function fetchData() {
     // Check if the response is successful (status code 200-299)
     if (response.ok) {
       loader.style.display = 'none';
-      console.log('Koca: loader ', loader);
+
      
       const responseData = await response.json(); // Parse the JSON response
 

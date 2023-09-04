@@ -209,14 +209,36 @@ body > button:hover {
 }
 
 #divider {
-  position: fixed;
-  bottom: 20;
+  position: static;
   width: 1110px;
   background-color: #164175;
   height: 3.5px;
-  margin-bottom: 250px;
+  margin-bottom: -20px;
+  margin-top: -20px;
+}
 
-  /* position: static; */
+/* LARGE */
+@media (min-width: 1750px) {
+  #divider {
+    margin-bottom: -23px;
+    margin-top: -23px;
+  }
+}
+
+/* MEDIUM */
+@media (max-width: 1750px) {
+  #divider {
+    margin-bottom: -12px;
+    margin-top: -12px;
+  }
+}
+
+/* SMALL */
+@media (max-width: 1650px) {
+  #divider {
+    margin-bottom: -1px;
+    margin-top: -1px;
+  }
 }
 
 /* LOADER */
@@ -256,8 +278,8 @@ body > button:hover {
 }
 
 .body-text {
-  width: 800px;
-  margin-left: 70px;
+  width: 700px;
+  margin-left: 120px;
   margin-top: 10px;
   font-size: 16px;
 }
@@ -270,7 +292,7 @@ body > button:hover {
 }
 
 .references-section {
-  width: 300px;
+  width: 450px;
   margin-left: 40px;
   margin-top: 10px;
 }
@@ -282,6 +304,7 @@ body > button:hover {
 .link-list {
   display: flex;
   flex-direction: column;
+  gap: 5px;
 }
 
 /* FOOTER */
