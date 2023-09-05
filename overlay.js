@@ -2,35 +2,20 @@ var header = document.getElementById("welcome-screen-header").style;
 var bubbles = document.getElementById("bubbles-body").style;
 var screen1Array = document.getElementsByClassName("screen-1");
 var screen2Array = document.getElementsByClassName("screen-2");
-// var errorScreenArray = document.getElementsByClassName("error-screen");
 var resetBtn = document.getElementsByClassName("close")[0];
 var charCount = document.getElementById('char-count-overlay')
 var form = document.getElementsByClassName("search-bar-content")[0]
-console.log('Koca: form ', form);
 var searchInput = document.getElementById("searchText")
 var loader = document.getElementById("loader")
 var resultsContent = document.getElementsByClassName("results-content")[0]
 
-
-
-
 searchInput.addEventListener('input', function (event) {
-  console.log("DSJFLDSJFJL")
   if (searchInput.value.length > 0) {
   resetBtn.style.visibility = 'visible'
   } 
   charCount.innerHTML = `${searchInput.value.length}/1000`
   resultsContent.insertAdjacentHTML("afterbegin", finalChat)
 });
-
-
-// document.getElementsByClassName('search-icon')[0].addEventListener('click', function (event) {
-// generateResponse()
-// });
-
-// document.getElementsByClassName("search-bar-content")[0].addEventListener('submit', (event) => {
-//   generateResponse()
-// })
 
 function resetSearch(){
   resetBtn.style.visibility = 'hidden'
@@ -64,7 +49,7 @@ function openOverlay(names) {
 function closeOverlay() {
   form.reset()
   resetSearch()
-  document.body.style.overflow = "visible";
+  // document.body.style.overflow = "visible";
   Object.values(overlays).forEach((el) => el.classList.remove("open"));
   overlayBg.classList.remove("open");
 
@@ -78,22 +63,6 @@ function closeOverlay() {
   }
 }
 
-
-function fadeInLoader() {
-  loader.style.display = 'block';
-  // var opacity = 0;
-  // loader.style.display = 'block';
-  // loader.style.opacity = 0;
-
-  // var fadeInterval = setInterval(function () {
-  //   if (opacity < 1) {
-  //     opacity += 0.1;
-  //     loader.style.opacity = opacity;
-  //   } else {
-  //     clearInterval(fadeInterval);
-  //   }
-  // }, 100); // Adjust the interval for smoother or faster fading
-}
 
 function fadeOutWelcomeScreen() {
   header.opacity = 1;
@@ -109,15 +78,9 @@ function fadeOutWelcomeScreen() {
       ? (bubbles.display = "none")
       : setTimeout(fade, 40);
   })();
-  fadeInLoader()
-  // THE CODE BELOW ONLY WORKS IF THE API IS DELAYED
-  // setTimeout(() => {
-  //   // loader.style.display = 'block';
-  //   fadeInLoader()
-  // }, 800);
+  // Fade in Loader
+  loader.style.display = 'block';
 }
-
-
 
 
 function chatTemplate(data) {
@@ -127,14 +90,14 @@ function chatTemplate(data) {
   return `
   <h5 class='screen-2 results-question'>${data.prompt}</h5>
   <hr id="divider" class="screen-2" />
-  <div class="screen-2-body">
+  <div class="screen-2-body screen-2">
   <p class="screen-2 body-text">${data.content}</p>
   <div class="vl screen-2"></div>
   <div class="screen-2 references-section">
     <h5 class="references-header">References</h5>
     <div class="link-list">
     ${data.references.map((reference) =>{
-      return `<a href="${reference.link}">${reference.title}</a>`;
+      return `<a class="reference" href="${reference.link}">${reference.title}</a>`;
         }).join('')}
     </div>
   </div>
@@ -158,7 +121,6 @@ const headers = {
 //What are the top 10 priorities for CDOs?
 // What is 3-Step Guide for Data Leaders to Move from Hype to Results?
 
-
 const data = {
   "prompt": `${searchInput.value}`,
 };
@@ -176,11 +138,10 @@ async function fetchData() {
     if (response.ok) {
       loader.style.display = 'none';
 
-     
       const responseData = await response.json(); // Parse the JSON response
 
-      const finalChat =  chatTemplate(responseData)
-      resultsContent.insertAdjacentHTML("afterbegin", finalChat)
+      const modifiedMarkup =  chatTemplate(responseData)
+      resultsContent.insertAdjacentHTML("afterbegin", modifiedMarkup)
 
     } else {
       loader.style.display = 'none';
@@ -192,7 +153,5 @@ async function fetchData() {
     console.error("Error:", error);
   }
 }
-
 fetchData();
-
 }
