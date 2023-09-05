@@ -79,13 +79,38 @@ function fadeOutWelcomeScreen() {
       : setTimeout(fade, 40);
   })();
   // Fade in Loader
-  loader.style.display = 'block';
+  // setTimeout
+  // loader.style.display = 'block';
+
+  setTimeout(function(){
+    loader.style.display = 'block';
+}, 800);
 }
+
+
+function textToHTML(inputText) {
+  const priorities = inputText.split('* ').filter(item => item.trim() !== '');
+
+  let html = '<ul>';
+
+  priorities.forEach(priority => {
+      html += `<li>${priority.trim()}</li>`;
+  });
+
+  html += '</ul>';
+  return html;
+}
+
+
 
 
 function chatTemplate(data) {
   console.log('Koca: data references ', data.references);
+  console.log('HTML', textToHTML(data.content))
 
+  // ${data.content.includes('*') ? 
+  // `<div class="screen-2 body-text">${textToHTML(data.content)}</div>` :
+  // `<p class="screen-2 body-text">${data.content}</p>`}
 
   return `
   <h5 class='screen-2 results-question'>${data.prompt}</h5>
@@ -111,8 +136,8 @@ function generateResponse() {
   fadeOutWelcomeScreen();
 
 
-  const url = "https://javascripttest-s45m7n7ksq-uc.a.run.app";
-  // const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fair-rss-query"
+  // const url = "https://javascripttest-s45m7n7ksq-uc.a.run.app";
+  const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fair-rss-query"
 // const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fr-rss-qry";
 const headers = {
   "Content-Type": "application/json",
