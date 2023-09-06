@@ -82,8 +82,12 @@ function fadeOutWelcomeScreen() {
   // setTimeout
   // loader.style.display = 'block';
 
+  // TEST LOADER
+  loader.style.display = 'block';
+
+  // PROD LOADER -NOTE, IF RESPONSE COMES IN EARLY, THIS COULD BREAK:
   setTimeout(function(){
-    loader.style.display = 'block';
+    // loader.style.display = 'block';
 }, 800);
 }
 
@@ -112,12 +116,29 @@ function chatTemplate(data) {
   // `<div class="screen-2 body-text">${textToHTML(data.content)}</div>` :
   // `<p class="screen-2 body-text">${data.content}</p>`}
 
+// WITH OLD BORDER BELOW
+//   return `
+//   <h5 class='screen-2 results-question'>${data.prompt}</h5>
+//   <hr id="divider" class="screen-2" />
+//   <div class="screen-2-body screen-2">
+//   <p class="screen-2 body-text">${data.content}</p>
+//   <div class="vl screen-2"></div>
+//   <div class="screen-2 references-section">
+//     <h5 class="references-header">References</h5>
+//     <div class="link-list">
+//     ${data.references.map((reference) =>{
+//       return `<a class="reference" href="${reference.link}">${reference.title}</a>`;
+//         }).join('')}
+//     </div>
+//   </div>
+// </div>
+//   `
+
   return `
   <h5 class='screen-2 results-question'>${data.prompt}</h5>
   <hr id="divider" class="screen-2" />
   <div class="screen-2-body screen-2">
   <p class="screen-2 body-text">${data.content}</p>
-  <div class="vl screen-2"></div>
   <div class="screen-2 references-section">
     <h5 class="references-header">References</h5>
     <div class="link-list">
@@ -136,8 +157,8 @@ function generateResponse() {
   fadeOutWelcomeScreen();
 
 
-  // const url = "https://javascripttest-s45m7n7ksq-uc.a.run.app";
-  const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fair-rss-query"
+  const url = "https://javascripttest-s45m7n7ksq-uc.a.run.app";
+  // const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fair-rss-query"
 // const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fr-rss-qry";
 const headers = {
   "Content-Type": "application/json",

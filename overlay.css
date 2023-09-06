@@ -280,6 +280,9 @@ body > button:hover {
   width: 725px;
   margin-top: 10px;
   font-size: 16px;
+  border-right: 1px solid #164175;
+  padding-right: 20px;
+  margin-right: 20px;
 }
 
 .vl {
@@ -296,7 +299,7 @@ body > button:hover {
 }
 
 .references-header {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .reference {
@@ -307,7 +310,7 @@ body > button:hover {
 .link-list {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 }
 
 /* FOOTER */
