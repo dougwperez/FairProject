@@ -83,25 +83,44 @@ function fadeOutWelcomeScreen() {
   // loader.style.display = 'block';
 
   // TEST LOADER
-  loader.style.display = 'block';
+  // loader.style.display = 'block';
 
   // PROD LOADER -NOTE, IF RESPONSE COMES IN EARLY, THIS COULD BREAK:
   setTimeout(function(){
-    // loader.style.display = 'block';
+    loader.style.display = 'block';
 }, 800);
+}
+
+function errorTemplate(data) {
+  console.log('Koca: data references ', data.references);
+
+  return `
+  <h5 class='screen-2 results-question'>${data}</h5>
+  <hr id="divider" class="screen-2" />
+  <div class="screen-2-body screen-2">
+  <p class="screen-2 error-body-text">No information found for <b>${data}</b></p>
+</div>
+  `
 }
 
 
 function textToHTML(inputText) {
-  const priorities = inputText.split('* ').filter(item => item.trim() !== '');
+  const priorities = inputText.split(/(\d+)/).filter(item => item.trim() !== '');
 
-  let html = '<ul>';
+  let html = `<div>${priorities[0]}`
 
-  priorities.forEach(priority => {
+  html += '<ul>';
+
+  priorities.forEach((priority, index) => {
+    if ( index === 0 ){
+      return;
+    }
       html += `<li>${priority.trim()}</li>`;
   });
+  console.log('Koca: priorities ', priorities);
 
-  html += '</ul>';
+
+  html += '</ul></div>';
   return html;
 }
 
@@ -134,21 +153,42 @@ function chatTemplate(data) {
 // </div>
 //   `
 
-  return `
-  <h5 class='screen-2 results-question'>${data.prompt}</h5>
-  <hr id="divider" class="screen-2" />
-  <div class="screen-2-body screen-2">
-  <p class="screen-2 body-text">${data.content}</p>
-  <div class="screen-2 references-section">
-    <h5 class="references-header">References</h5>
-    <div class="link-list">
-    ${data.references.map((reference) =>{
-      return `<a class="reference" href="${reference.link}">${reference.title}</a>`;
-        }).join('')}
-    </div>
+// TEST ENV
+return `
+<h5 class='screen-2 results-question'>${data.prompt}</h5>
+<hr id="divider" class="screen-2" />
+<div class="screen-2-body screen-2">
+${data.content.includes('1') ? 
+`<div class="screen-2 body-text">${textToHTML(data.content)}</div>` :
+`<p class="screen-2 body-text">${data.content}</p>`}
+<div class="screen-2 references-section">
+  <h5 class="references-header">References</h5>
+  <div class="link-list">
+  ${data.references.map((reference) =>{
+    return `<a class="reference" href="${reference.link}">${reference.title}</a>`;
+      }).join('')}
   </div>
 </div>
-  `
+</div>
+`
+
+
+// PROD ENV
+//   return `
+//   <h5 class='screen-2 results-question'>${data.prompt}</h5>
+//   <hr id="divider" class="screen-2" />
+//   <div class="screen-2-body screen-2">
+//   <p class="screen-2 body-text">${data.content}</p>
+//   <div class="screen-2 references-section">
+//     <h5 class="references-header">References</h5>
+//     <div class="link-list">
+//     ${data.references.map((reference) =>{
+//       return `<a class="reference" href="${reference.link}">${reference.title}</a>`;
+//         }).join('')}
+//     </div>
+//   </div>
+// </div>
+//   `
 }
 
 function generateResponse() {
@@ -156,9 +196,11 @@ function generateResponse() {
   event.preventDefault()
   fadeOutWelcomeScreen();
 
-
-  const url = "https://javascripttest-s45m7n7ksq-uc.a.run.app";
-  // const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fair-rss-query"
+// TEST ENV
+  // const url = "https://javascripttest-s45m7n7ksq-uc.a.run.app";
+// PROD ENV
+  const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fair-rss-query"
+// ERROR ENV
 // const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fr-rss-qry";
 const headers = {
   "Content-Type": "application/json",
@@ -191,6 +233,9 @@ async function fetchData() {
 
     } else {
       loader.style.display = 'none';
+      console.log("Error Screen")
+      const modifiedErrorMarkup =  errorTemplate(searchInput.value)
+      resultsContent.insertAdjacentHTML("afterbegin", modifiedErrorMarkup)
       throw new Error("Request failed with status: " + response.status);
     }
   } catch (error) {

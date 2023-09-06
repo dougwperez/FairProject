@@ -285,6 +285,12 @@ body > button:hover {
   margin-right: 20px;
 }
 
+.error-body-text {
+  width: 725px;
+  margin-top: 10px;
+  font-size: 18px;
+}
+
 .vl {
   border-left: 1px solid #164175;
   margin-left: 40px;
