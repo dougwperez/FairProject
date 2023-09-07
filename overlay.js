@@ -14,7 +14,7 @@ searchInput.addEventListener('input', function (event) {
   resetBtn.style.visibility = 'visible'
   } 
   charCount.innerHTML = `${searchInput.value.length}/1000`
-  resultsContent.insertAdjacentHTML("afterbegin", finalChat)
+  // resultsContent.insertAdjacentHTML("afterbegin", finalChat)
 });
 
 function resetSearch(){
@@ -44,6 +44,10 @@ function openOverlay(names) {
   if (searchInput.value.length > 0) {
     resetBtn.style.visibility = 'visible'
   }
+  for (let item of screen1Array) {
+    item.style.display = "inline";
+    item.style.opacity = 1;
+  }
 
 }
 function closeOverlay() {
@@ -54,7 +58,7 @@ function closeOverlay() {
   overlayBg.classList.remove("open");
 
   for (let item of screen1Array) {
-    item.style.display = "inline";
+    item.style.display = "none";
     item.style.opacity = 1;
   }
 
@@ -83,16 +87,15 @@ function fadeOutWelcomeScreen() {
   // loader.style.display = 'block';
 
   // TEST LOADER
-  loader.style.display = 'block';
+  // loader.style.display = 'block';
 
   // PROD LOADER -NOTE, IF RESPONSE COMES IN EARLY, THIS COULD BREAK:
   setTimeout(function(){
-    // loader.style.display = 'block';
+    loader.style.display = 'block';
 }, 800);
 }
 
 function errorTemplate(data) {
-  console.log('Koca: data references ', data.references);
 
   return `
   <h5 class='screen-2 results-question'>${data}</h5>
@@ -105,7 +108,13 @@ function errorTemplate(data) {
 
 
 function textToHTML(inputText) {
-  const priorities = inputText.split('*').filter(item => item.trim() !== '');
+
+  const numericSplits = inputText.split(/\d+\./)
+  const bulletSplits = inputText.split('*');
+
+  const splitFactor = bulletSplits.length >= numericSplits.length ? '*' : /\d+\./
+
+  let priorities = inputText.split(splitFactor).filter(item => item.trim() !== '');
 
   let html = `<div>${priorities[0]}`
 
@@ -117,7 +126,6 @@ function textToHTML(inputText) {
     }
       html += `<li>${priority.trim()}</li>`;
   });
-  console.log('Koca: priorities ', priorities);
 
 
   html += '</ul></div>';
@@ -125,59 +133,27 @@ function textToHTML(inputText) {
   return html;
 }
 
-function numericTextToHTML(inputText) {
-  const steps = inputText.split(/\d+\./).filter(step => step.trim() !== '');
-
-  let html = '<ol>';
-
-  steps.forEach(step => {
-      html += `<li>${step.trim()}</li>`;
-  });
-
-  html += '</ol>';
-  
-  return html;
-}
-
-
-
 
 function chatTemplate(data) {
-  console.log('Koca: data references ', data.references);
-  console.log('HTML', textToHTML(data.content))
+  
+  const referencesArray = data.references
 
-  // ${data.content.includes('*') ? 
-  // `<div class="screen-2 body-text">${textToHTML(data.content)}</div>` :
-  // `<p class="screen-2 body-text">${data.content}</p>`}
-
-// TEST ENV !!!!!!!!!!!!!!!!!!!!!!!!!!!
-// return `
-// <h5 class='screen-2 results-question'>${data.prompt}</h5>
-// <hr id="divider" class="screen-2" />
-// <div class="screen-2-body screen-2">
-// <div class="screen-2 body-text">${textToHTML(data.content)}</div>
-// <div class="screen-2 references-section">
-//   <h5 class="references-header">References</h5>
-//   <div class="link-list">
-//   ${data.references.map((reference) =>{
-//     return `<a class="reference" href="${reference.link}">${reference.title}</a>`;
-//       }).join('')}
-//   </div>
-// </div>
-// </div>
-// `
-
-
-// PROD ENV ***************************
+  const isReferenceUnique = (reference, index, array) => {
+    const jsonString = JSON.stringify(reference);
+    return index === array.findIndex((obj) => JSON.stringify(obj) === jsonString);
+  }
+  
+  const uniqueReferences = referencesArray.filter(isReferenceUnique);
+  
   return `
   <h5 class='screen-2 results-question'>${data.prompt}</h5>
   <hr id="divider" class="screen-2" />
   <div class="screen-2-body screen-2">
-  <p class="screen-2 body-text">${data.content}</p>
+  <div class="screen-2 body-text">${textToHTML(data.content)}</div>
   <div class="screen-2 references-section">
     <h5 class="references-header">References</h5>
     <div class="link-list">
-    ${data.references.map((reference) =>{
+    ${uniqueReferences.map((reference) =>{
       return `<a class="reference" href="${reference.link}">${reference.title}</a>`;
         }).join('')}
     </div>
@@ -195,7 +171,9 @@ function generateResponse() {
 // const url = "https://javascripttest-s45m7n7ksq-uc.a.run.app";
 
 // PROD ENV ***************************
-const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fair-rss-query"
+const url = 'https://cdomag.ice.rackspace.net'
+
+// const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fair-rss-query"
 
 // ERROR ENV
 // const url = "https://us-central1-fair-cdo-prj-6e5b.cloudfunctions.net/cf-fr-rss-qry";
