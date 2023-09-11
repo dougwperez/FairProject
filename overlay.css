@@ -3,6 +3,9 @@ body {
   font-family: Arial;
   margin: 50px;
   /* overflow-y: hidden; */
+  background-image: url("screenShot2.jpeg");
+  background-repeat: no-repeat;
+  background-position: center top 50px; /* Adjust the 'top' value to shift the image down */
 }
 body > button {
   display: block;
@@ -202,6 +205,9 @@ body > button:hover {
   .results-content {
     gap: 0px;
   }
+  .screen-2-body {
+    padding-bottom: 10px;
+  }
 }
 
 .bubbles-image {
@@ -212,6 +218,7 @@ body > button:hover {
   position: static;
   width: 99%;
   background-color: #164175;
+  opacity: 1;
   height: 3.5px;
   margin-bottom: -20px;
   margin-top: -20px;
@@ -372,4 +379,18 @@ body > button:hover {
   right: 0;
   margin-bottom: 10px;
   margin-right: 10px;
+}
+
+/* INDEX PAGE */
+
+.semanticSearchBtn {
+  cursor: pointer;
+  margin-right: 80px;
+  /* font-family: "Roboto Condensed"; */
+}
+
+.cdo-mag {
+  margin-left: 40px;
+
+  transform: translateY(-20px);
 }
